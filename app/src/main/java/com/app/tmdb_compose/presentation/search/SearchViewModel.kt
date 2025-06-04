@@ -15,7 +15,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getContentUseCase: GetContentUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow<UiState<List<ContentItem>>>(UiState.Success(emptyList())) // Initial empty state
+    private val _uiState =
+        MutableStateFlow<UiState<List<ContentItem>>>(UiState.Success(emptyList())) // Initial empty state
     val uiState: StateFlow<UiState<List<ContentItem>>> = _uiState
 
     fun search(query: String) {
@@ -27,7 +28,9 @@ class SearchViewModel @Inject constructor(
             _uiState.value = UiState.Loading
             getContentUseCase.executeForSearch(query)
                 .onSuccess { items -> _uiState.value = UiState.Success(items) }
-                .onFailure { error -> _uiState.value = UiState.Error(error.message ?: "Unknown error") }
+                .onFailure { error ->
+                    _uiState.value = UiState.Error(error.message ?: "Unknown error")
+                }
         }
     }
 }
