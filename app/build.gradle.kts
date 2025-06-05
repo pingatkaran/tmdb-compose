@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -17,6 +20,20 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        fun getApiKey(propertyKey: String): String {
+            val propsFile = project.rootProject.file("local.properties")
+            if (propsFile.exists()) {
+                val props = Properties()
+                FileInputStream(propsFile).use { props.load(it) }
+                return props.getProperty(propertyKey) ?: ""
+            }
+            return ""
+        }
+
+        // Add TMDB_API_KEY to BuildConfig
+        // The name "TMDB_API_KEY" here must match what you use in local.properties
+        buildConfigField("String", "TMDB_API_KEY", "\"${getApiKey("TMDB_API_KEY")}\"")
     }
 
     buildTypes {
@@ -39,6 +56,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
@@ -76,6 +94,7 @@ dependencies {
 
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
+    implementation(libs.coil.compose)
 
     // Test dependencies
     testImplementation(libs.junit)
