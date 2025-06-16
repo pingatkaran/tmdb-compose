@@ -32,7 +32,7 @@ To build and run this project, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/tmdb-compose.git # Replace with the actual repository URL
+    git clone https://github.com/pingatkaran/tmdb-compose.git 
     cd tmdb-compose
     ```
 2.  **Get a TMDb API Key:**
@@ -53,7 +53,6 @@ To build and run this project, follow these steps:
     *   Select an emulator or connect a physical device.
     *   Click the "Run" button (green play icon) in Android Studio.
 
-**Note:** You might need to replace `https://github.com/your-username/tmdb-compose.git` with the actual URL of this repository if you are hosting it elsewhere.
 
 ## Future Enhancements
 
